@@ -16,3 +16,9 @@ main{
 input{
   outline: none;
 }
+
+@media (max-width: 500px) {
+  main {
+    margin: 0 rem-calc(20);
+  }
+}

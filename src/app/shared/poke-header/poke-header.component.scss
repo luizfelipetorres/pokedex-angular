@@ -1,10 +1,12 @@
 @import '../../../config-scss/rem-calc.scss';
+@import '../../../config-scss/animation.scss';
 
 :host{
   header{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     padding: rem-calc(40) 0;
   }
 }

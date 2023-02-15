@@ -1,0 +1,15 @@
+@import 'rem-calc.scss';
+
+
+.btn {
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  width: 95%;
+  margin-top: rem-calc(20);
+  padding: rem-calc(17);
+  color: white;
+  border-radius: rem-calc(10);
+  background: var(--secondary-color);
+}

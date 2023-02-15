@@ -1,44 +1,61 @@
 @import '../../../config-scss/rem-calc.scss';
+@import '../../../config-scss/animation.scss';
 
 :host {
-  display: flex;
-  justify-content: space-between;
-  margin-top: rem-calc(20);
-  .pokemon {
+
+  .list {
     display: flex;
-    width: 40%;
     justify-content: space-between;
-    background-color: white;
-    border-radius: rem-calc(10);
-    padding: rem-calc(20);
+    flex-wrap: wrap;
+    margin-top: rem-calc(20);
+    text-transform: capitalize;
 
-    &__image {
-      background-image: url('../../../assets/bg/bolinhas.svg');
-      margin: rem-calc(20);
-      padding: rem-calc(10);
+    .pokemon {
+      display: flex;
+      justify-content: space-between;
+      background-color: white;
+      border-radius: rem-calc(10);
+      padding: rem-calc(20);
+      margin-bottom: rem-calc(10);
+      width: calc(49% - 2.5rem);
+      text-decoration: none;
+      color: var(--primary-color);
+
+      &__image {
+        display: flex;
+        background-image: url('../../../assets/bg/bolinhas.svg');
+        margin: rem-calc(20);
+        padding: rem-calc(10);
+
+        img {
+          justify-content: center;
+          align-items: center;
+          width: rem-calc(60);
+        }
+      }
     }
-  }
 
-  &__status {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    &__status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  h2 {
-    font-weight: 900;
-    font-style: italic;
-    margin-bottom: rem-calc(20);
-  }
+    h2 {
+      font-weight: 900;
+      font-style: italic;
+      margin-bottom: rem-calc(20);
+    }
 
-  li {
-    background: var(--cinza);
-    border-radius: rem-calc(32);
-    height: rem-calc(16);
-    margin-bottom: rem-calc(10);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: rem-calc(10);
+    li {
+      background: var(--cinza);
+      border-radius: rem-calc(32);
+      height: rem-calc(16);
+      margin-bottom: rem-calc(10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: rem-calc(10);
+    }
   }
 }

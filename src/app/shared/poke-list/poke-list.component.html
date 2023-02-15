@@ -3,7 +3,7 @@
   <ng-template ngFor let-pokemon [ngForOf]="filter">
     <a
       [routerLink]="['details', pokemon.status.id]"
-      class="pokemon "
+      class="pokemon"
       *ngIf="pokemon.status"
     >
       <section class="pokemon__status slideInRight">
@@ -22,4 +22,15 @@
       </div>
     </a>
   </ng-template>
+
+  <section class="btns">
+    <button class="btn" id="next" (click)="changePageTo(nextPage)">
+      Avançar
+    </button>
+    <ng-template [ngIf]="previousPage">
+      <button class="btn" id="previous" (click)="changePageTo(previousPage)">
+        Voltar
+      </button>
+    </ng-template>
+  </section>
 </section>

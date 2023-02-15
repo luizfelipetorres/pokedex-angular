@@ -1,5 +1,6 @@
 @import '../../../config-scss/rem-calc.scss';
 @import '../../../config-scss/animation.scss';
+@import '../../../config-scss/btn.scss';
 
 :host {
 
@@ -56,6 +57,22 @@
       align-items: center;
       justify-content: center;
       font-size: rem-calc(10);
+    }
+
+    .btns {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row-reverse;
+
+      width: 100%;
+
+      button {
+        width: 45%;
+      }
+
+      #next {
+        justify-content: center;
+      }
     }
   }
 }

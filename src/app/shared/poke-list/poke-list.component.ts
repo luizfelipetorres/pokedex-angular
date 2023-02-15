@@ -13,6 +13,9 @@ export class PokeListComponent implements OnInit {
   public _search: string | undefined
   public offset: number = 0;
   public limit: number = 20;
+  public nextPage: string = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
+  public previousPage: string | undefined;
+
 
 
   public search(value: string) {
@@ -24,24 +27,18 @@ export class PokeListComponent implements OnInit {
   constructor(private pokeApiService: PokeApiService) { }
 
   ngOnInit(): void {
-    this.nextPage()
+    this.changePageTo(this.nextPage)
   }
-  nextPage() {
-    this.pokeApiService.apiListAllPokemons(this.offset, this.limit).subscribe(
+
+  public changePageTo(url: string) {
+    this.pokeApiService.apiListAllPokemons(url).subscribe(
       res => {
         this.allPokemons = res.results
         this.filter = res.results
+        this.nextPage = res.next
+        this.previousPage = res.previous
         console.log(res)
       }
     )
-    this.offset += 20;;
   }
-
-  @HostListener("window:scroll", [])
-  onScroll(): void {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
-      this.nextPage()
-    }
-  }
-
 }

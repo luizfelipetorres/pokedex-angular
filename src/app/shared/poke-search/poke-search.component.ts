@@ -10,7 +10,8 @@ export class PokeSearchComponent {
   @Output() public emitSearch: EventEmitter<string> = new EventEmitter()
 
   public search(value: string){
-    this.emitSearch.emit(value)
+    const name = value.trim().toLowerCase().replace(/ /gm, '-')
+    this.emitSearch.emit(name)
   }
 
 }

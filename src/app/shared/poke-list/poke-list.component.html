@@ -1,4 +1,4 @@
-<poke-search (emitSearch)="search($event)"></poke-search>
+<poke-search (emitSearch)="search = $event"></poke-search>
 <section class="list">
   <ng-template ngFor let-pokemon [ngForOf]="filter">
     <a
@@ -23,8 +23,7 @@
     </a>
   </ng-template>
 
-  <ng-template *ngIf="!search">
-    <section class="btns">
+    <section class="btns" *ngIf="!search">
       <button class="btn" id="next" (click)="changePageTo(nextPage)">
         Avançar
       </button>
@@ -34,5 +33,4 @@
         </button>
       </ng-template>
     </section>
-  </ng-template>
 </section>

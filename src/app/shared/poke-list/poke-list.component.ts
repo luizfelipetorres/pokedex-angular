@@ -10,18 +10,23 @@ export class PokeListComponent implements OnInit {
 
   public allPokemons: any = []
   public filter: any
-  public _search: string | undefined
+  private _search: string = ''
   public offset: number = 0;
   public limit: number = 20;
   public nextPage: string = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
   public previousPage: string | undefined;
 
 
+  get search(): string{
+    return this._search;
+  }
 
-  public search(value: string) {
+  set search(value: string) {
+    this._search = value
     this.filter = this.allPokemons.filter(
       (pokemon: any) => !pokemon.name.indexOf(value.toLowerCase())
     )
+    console.log(this.search)
     if (this.filter.length == 0) {
       this.pokeApiService.getPokemonInfo(`https://pokeapi.co/api/v2/pokemon/${value}`).subscribe(
         res => {
@@ -38,6 +43,7 @@ export class PokeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.changePageTo(this.nextPage)
+    console.log(!this.search)
   }
 
   public changePageTo(url: string) {

@@ -10,7 +10,7 @@
     <section class="pokemon__statistics fadeIn">
       <section class="pokemon__image slideInDown">
         <img
-          [src]="pokemon[0].sprites.other.dream_world.front_default"
+          [src]="pokemon[0].sprites.other.dream_world.front_default || pokemon[0].sprites.front_default"
           alt=""
         />
       </section>

@@ -16,7 +16,7 @@
       </section>
       <div class="pokemon__image slideInDown">
         <img
-          [src]="pokemon.status.sprites.other.dream_world.front_default"
+          [src]="pokemon.status.sprites.other.dream_world.front_default || pokemon.status.sprites.front_default"
           [alt]="pokemon.name"
         />
       </div>

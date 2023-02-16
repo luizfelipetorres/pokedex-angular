@@ -29,7 +29,6 @@ export class DetailsComponent implements OnInit {
 
     return forkJoin([apiPokemon, apiName]).subscribe(
       res => {
-        console.log(res)
         this.pokemon = res
       }
     )

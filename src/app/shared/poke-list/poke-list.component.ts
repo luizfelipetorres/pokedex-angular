@@ -27,7 +27,6 @@ export class PokeListComponent implements OnInit {
     this.filter = this.allPokemons.filter(
       (pokemon: any) => !pokemon.name.indexOf(value.toLowerCase())
     )
-    console.log(this.search)
     if (this.filter.length == 0) {
       this.pokeApiService.getPokemonInfo(`https://pokeapi.co/api/v2/pokemon/${value}`).subscribe(
         res => {
@@ -44,7 +43,6 @@ export class PokeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.changePageTo(this.nextPage)
-    console.log(!this.search)
   }
 
   public changePageTo(url: string) {

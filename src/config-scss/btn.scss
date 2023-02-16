@@ -7,9 +7,12 @@
   justify-self: center;
   align-items: center;
   width: 95%;
-  margin-top: rem-calc(20);
+  margin: rem-calc(20) 0;
   padding: rem-calc(17);
   color: white;
   border-radius: rem-calc(10);
   background: var(--secondary-color);
+  outline: none;
+  border: none;
+  text-decoration: none;
 }

@@ -1,4 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { catchError, Observable, of } from 'rxjs';
 import { PokeApiService } from 'src/app/services/poke-api.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class PokeListComponent implements OnInit {
   public previousPage: string | undefined;
 
 
-  get search(): string{
+  get search(): string {
     return this._search;
   }
 

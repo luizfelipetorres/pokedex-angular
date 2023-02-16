@@ -22,6 +22,16 @@ export class PokeListComponent implements OnInit {
     this.filter = this.allPokemons.filter(
       (pokemon: any) => !pokemon.name.indexOf(value.toLowerCase())
     )
+    if (this.filter.length == 0) {
+      this.pokeApiService.getPokemonInfo(`https://pokeapi.co/api/v2/pokemon/${value}`).subscribe(
+        res => {
+          this.filter = [{
+            name: res.name,
+            status: res
+          }]
+        }
+      )
+    }
   }
 
   constructor(private pokeApiService: PokeApiService) { }
@@ -37,7 +47,6 @@ export class PokeListComponent implements OnInit {
         this.filter = res.results
         this.nextPage = res.next
         this.previousPage = res.previous
-        console.log(res)
       }
     )
   }

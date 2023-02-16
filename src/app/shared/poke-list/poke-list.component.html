@@ -23,14 +23,16 @@
     </a>
   </ng-template>
 
-  <section class="btns">
-    <button class="btn" id="next" (click)="changePageTo(nextPage)">
-      Avançar
-    </button>
-    <ng-template [ngIf]="previousPage">
-      <button class="btn" id="previous" (click)="changePageTo(previousPage)">
-        Voltar
+  <ng-template *ngIf="!search">
+    <section class="btns">
+      <button class="btn" id="next" (click)="changePageTo(nextPage)">
+        Avançar
       </button>
-    </ng-template>
-  </section>
+      <ng-template [ngIf]="previousPage">
+        <button class="btn" id="previous" (click)="changePageTo(previousPage)">
+          Voltar
+        </button>
+      </ng-template>
+    </section>
+  </ng-template>
 </section>

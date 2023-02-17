@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin } from 'rxjs';
 import { PokeApiService } from 'src/app/services/poke-api.service';
 
 @Component({
@@ -8,18 +7,27 @@ import { PokeApiService } from 'src/app/services/poke-api.service';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnChanges {
 
   private urlPokemon: string = 'https://pokeapi.co/api/v2/pokemon';
-  private urlName: string = 'https://pokeapi.co/api/v2/pokemon-species';
   public pokemon: any[] = [];
   constructor(
     private pokeApiService: PokeApiService,
     private activatedRoute: ActivatedRoute
   ) { }
 
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getPokemon()
+  }
+
   ngOnInit(): void {
     this.getPokemon()
+    this.activatedRoute.params.subscribe(
+      params => {
+        this.getPokemon()
+      }
+    );
   }
 
   public getPokemon() {
@@ -30,11 +38,16 @@ export class DetailsComponent implements OnInit {
           (species: any) => {
             this.pokemon[0] = pokemon;
             this.pokemon[1] = species
+            console.log(this.pokemon)
           }
         )
-
       }
     )
+  }
+
+  public splitLast(url: string) {
+    const arr = url.split('/')
+    return arr[arr.length - 2]
   }
 
 }

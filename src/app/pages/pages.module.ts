@@ -11,7 +11,7 @@ import { SharedModule } from '../shared/shared.module';
   declarations: [
     HomeComponent,
     DetailsComponent
-  ],
+    ],
   imports: [
     CommonModule,
     RoutingModule,

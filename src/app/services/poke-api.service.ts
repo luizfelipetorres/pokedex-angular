@@ -1,22 +1,49 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap, map } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { EPage } from '../core/enums/EPage.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PokeApiService {
 
-  private baseUrl: string = 'https://pokeapi.co/api/v2/pokemon';
   constructor(private http: HttpClient) { }
 
-  public apiListAllPokemons(url: string): Observable<any> {
-    return this.http.get(url).pipe(
+  private _nextPage: string = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
+  private _currentPage: string = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
+  private _previousPage: string = '';
+
+  public get previousPage(): string {
+    return this._previousPage;
+  }
+
+
+
+  public apiListAllPokemons(page: EPage): Observable<any> {
+
+    const requestPage = () => {
+      switch (page) {
+        case EPage.NEXT:
+          return this._nextPage
+        case EPage.PREVIOUS:
+          return this.previousPage
+        default:
+          return this._currentPage
+      }
+    }
+
+    return this.http.get(requestPage()).pipe(
       tap((baseResult: any) => {
+        this._currentPage = requestPage()
+        this._nextPage = baseResult.next
+        this._previousPage = baseResult.previous
+
         baseResult.results.map((poke: any) => {
           this.getPokemonInfo(poke.url).subscribe(
             status => {
               poke.status = status
+
             }
           )
         })

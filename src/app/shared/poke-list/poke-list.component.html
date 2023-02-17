@@ -3,11 +3,11 @@
   <ng-template ngFor let-pokemon [ngForOf]="filter">
     <a
       [routerLink]="['details', pokemon.status.id]"
-      class="pokemon"
+      class="pokemon hvr-bounce-in"
       *ngIf="pokemon.status"
     >
       <section class="pokemon__status slideInRight">
-        <h2>{{ pokemon.name }}</h2>
+        <h2>{{ pokemon.name | pokeName }}</h2>
         <ul class="pokemon__status">
           <li *ngFor="let type of pokemon.status.types">
             {{ type.type.name }}
@@ -16,21 +16,24 @@
       </section>
       <div class="pokemon__image slideInDown">
         <img
-          [src]="pokemon.status.sprites.other.dream_world.front_default || pokemon.status.sprites.front_default"
+          [src]="
+            pokemon.status.sprites.other.dream_world.front_default ||
+            pokemon.status.sprites.other['official-artwork'].front_default
+          "
           [alt]="pokemon.name"
         />
       </div>
     </a>
   </ng-template>
 
-    <section class="btns" *ngIf="!search">
-      <button class="btn" id="next" (click)="changePageTo(nextPage)">
-        Avançar
+  <section class="btns" *ngIf="!search">
+    <button class="btn" id="next" (click)="changePageTo(nextPage)">
+      Avançar
+    </button>
+    <ng-template [ngIf]="this.pokeApiService.previousPage">
+      <button class="btn" id="previous" (click)="changePageTo(previousPage)">
+        Voltar
       </button>
-      <ng-template [ngIf]="previousPage">
-        <button class="btn" id="previous" (click)="changePageTo(previousPage)">
-          Voltar
-        </button>
-      </ng-template>
-    </section>
+    </ng-template>
+  </section>
 </section>

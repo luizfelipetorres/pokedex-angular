@@ -1,5 +1,5 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { EPage } from 'src/app/core/enums/EPage.enum';
 import { PokeApiService } from 'src/app/services/poke-api.service';
 
 @Component({
@@ -12,11 +12,14 @@ export class PokeListComponent implements OnInit {
   public allPokemons: any = []
   public filter: any
   private _search: string = ''
-  public offset: number = 0;
-  public limit: number = 20;
-  public nextPage: string = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
-  public previousPage: string | undefined;
 
+  get nextPage(): EPage {
+    return EPage.NEXT
+  }
+
+  get previousPage(): EPage {
+    return EPage.PREVIOUS
+  }
 
   get search(): string {
     return this._search;
@@ -39,19 +42,21 @@ export class PokeListComponent implements OnInit {
     }
   }
 
-  constructor(private pokeApiService: PokeApiService) { }
+  constructor(private _pokeApiService: PokeApiService) { }
 
-  ngOnInit(): void {
-    this.changePageTo(this.nextPage)
+  public get pokeApiService(): PokeApiService {
+    return this._pokeApiService;
   }
 
-  public changePageTo(url: string) {
-    this.pokeApiService.apiListAllPokemons(url).subscribe(
+  ngOnInit(): void {
+    this.changePageTo(EPage.CURRENT)
+  }
+
+  public changePageTo(page: EPage) {
+    this.pokeApiService.apiListAllPokemons(page).subscribe(
       res => {
         this.allPokemons = res.results
         this.filter = res.results
-        this.nextPage = res.next
-        this.previousPage = res.previous
       }
     )
   }

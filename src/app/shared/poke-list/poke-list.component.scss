@@ -1,8 +1,10 @@
 @import '../../../config-scss/rem-calc.scss';
 @import '../../../config-scss/animation.scss';
 @import '../../../config-scss/btn.scss';
+@import '../../../config-scss/hover.scss';
 
 :host {
+
 
   .list {
     display: flex;
@@ -12,13 +14,14 @@
     text-transform: capitalize;
 
     .pokemon {
+      $width: calc(49% - 2.5rem);
       display: flex;
       justify-content: space-between;
       background-color: white;
       border-radius: rem-calc(10);
       padding: rem-calc(20);
       margin-bottom: rem-calc(10);
-      width: calc(49% - 2.5rem);
+      width: $width;
       text-decoration: none;
       color: var(--primary-color);
 
